@@ -17,6 +17,10 @@ public final class Main {
   /**
    * Main initialization function. Do not perform any initialization here.
    *
+   * i'll do what i want you bozo
+   * 
+   * I'M the programmer here
+   * 
    * <p>If you change your main robot class, change the parameter type.
    */
   public static void main(String... args) {
