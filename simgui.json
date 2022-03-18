@@ -1,0 +1,55 @@
+{
+  "NTProvider": {
+    "types": {
+      "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Index": "Subsystem",
+      "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/SwerveSubSystem": "Subsystem",
+      "/LiveWindow/Ungrouped/DigitalInput[2]": "Digital Input",
+      "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[2]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[3]": "PIDController",
+      "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/VictorSP[0]": "Motor Controller"
+    }
+  },
+  "NetworkTables": {
+    "LiveWindow": {
+      ".status": {
+        "open": true
+      },
+      "Index": {
+        "open": true
+      },
+      "Shooter": {
+        "open": true
+      },
+      "Ungrouped": {
+        "PIDController[1]": {
+          "open": true
+        },
+        "PIDController[2]": {
+          "open": true
+        },
+        "PIDController[3]": {
+          "open": true
+        },
+        "PIDController[4]": {
+          "open": true
+        },
+        "Scheduler": {
+          "open": true
+        },
+        "VictorSP[0]": {
+          "open": true
+        },
+        "open": true
+      },
+      "open": true
+    },
+    "SmartDashboard": {
+      "open": true
+    }
+  }
+}
