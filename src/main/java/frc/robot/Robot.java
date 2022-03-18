@@ -9,6 +9,8 @@ import org.photonvision.PhotonCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 //this is a git fetch test btw these are imports they sorta important, uwu derek is stinky, i need help from asian guy at 148 please james 
+//james, please we dont know how to drive with a distance yet its confusing or something
+//~derek, 2022
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
