@@ -70,10 +70,10 @@ public class SwerveSubSystem extends SubsystemBase {
     }
     
     public void driveOffLine(){
-        frontLeft.driveOffLine1();
-        frontRight.driveOffLine1();
-        backLeft.driveOffLine1();
-        backRight.driveOffLine1();
+        frontLeft.driveOffLine1(Constants.autoDriveSpeed);
+        frontRight.driveOffLine1(Constants.autoDriveSpeed);
+        backLeft.driveOffLine1(Constants.autoDriveSpeed);
+        backRight.driveOffLine1(Constants.autoDriveSpeed);
     }
 
     public void stopModules(){

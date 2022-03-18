@@ -4,11 +4,13 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.DriveOffLine;
@@ -41,6 +43,7 @@ public class RobotContainer {
   private final Fire fire; 
   private final FastIndex fastIndex; 
   private final ReverseIndex reverseIndex; 
+  private final DriveOffLine driveOffLine; 
  
   private SendableChooser<Command> autonTaskChooser;
 
@@ -72,14 +75,12 @@ public class RobotContainer {
     reverseIndex = new ReverseIndex(index);
     reverseIndex.addRequirements(index);
 
-    //shit auto this is bad dont worry tho its for the funsies 
-    // driveOffLine = new DriveOffLine(SwerveModule); 
-    // driveOffLine.addRequirements(swerveSubSystem);
+    //uwu i like making things that are unnecessary just for derek 
+    driveOffLine = new DriveOffLine(swerveSubSystem);
+    driveOffLine.addRequirements(swerveSubSystem);
+
    
-
     
-
-  
 
     // Configure the button bindings
     configureButtonBindings();
@@ -89,6 +90,7 @@ public class RobotContainer {
   private void configureAuton() {
     autonTaskChooser = new SendableChooser<>();
     autonTaskChooser.addOption("poop ass", new ParallelDeadlineGroup(new FireAfter3Sec(index), new RevShooter(shooter)));
+    autonTaskChooser.addOption("drive off line", new DriveOffLine(swerveSubSystem));
     SmartDashboard.putData("auton", autonTaskChooser);
 }
 

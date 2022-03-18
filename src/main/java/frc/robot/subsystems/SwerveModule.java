@@ -114,11 +114,12 @@ public class SwerveModule {
             return;
         }
 
-        // if(Math.abs(getAnglePos()) >= Math.PI /2 && Math.round(desiredAngle*100)/100 == 0){
-        //     angleMotor.set(turningPidController.calculate(getAnglePos(), 0));
-        // }
-    
-        //state = SwerveModuleState.optimize(state, getState().angle); 
+        state = SwerveModuleState.optimize(state, getState().angle); 
+
+        if(Math.round(desiredAngle*10)/10 == 0){
+            angleMotor.set(turningPidController.calculate(getAnglePos(), desiredAngle));
+        }
+        
         
         /* attempted drive set */
         // driveMotor.set(ControlMode.Velocity, state.speedMetersPerSecond * Constants.MAXDriveSpeed100msTicks);  
@@ -133,13 +134,13 @@ public class SwerveModule {
         SmartDashboard.putNumber("drive speed", getDriveVel());  
         SmartDashboard.putNumber("state speed", state.speedMetersPerSecond); 
         SmartDashboard.putNumber("i dont know ", Constants.MAXDriveSpeed100msTicks); 
-      // SmartDashboard.putNumber("magencoder", getMagEncoder());
+        //SmartDashboard.putNumber("magencoder", getMagEncoder());
         //.putString("Swerve["+ getMagEncoder() + "] State", state.toString()); 
 
     }
 
-    public void driveOffLine1(){
-        driveMotor.set(ControlMode.PercentOutput, Constants.autoDriveSpeed);
+    public void driveOffLine1(double speed){
+        driveMotor.set(ControlMode.PercentOutput, speed);
     }
  
 

@@ -4,30 +4,22 @@
 
 package frc.robot.autos;
 
-import java.io.Console;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Index;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveModule;
+
 import frc.robot.subsystems.SwerveSubSystem;
 
 public class DriveOffLine extends CommandBase {
   private SwerveSubSystem swerveSub; 
-  private SwerveModule swerveMod; 
  
   private boolean finish = false; 
   Timer timer; 
 
 
   /** Creates a new DriveOffLine. */
-  public DriveOffLine(SwerveModule sM) {
-
-    
-    swerveMod = sM; 
-   
+  public DriveOffLine(SwerveSubSystem s) {
+      swerveSub = s; 
     addRequirements(swerveSub);
    
     
@@ -46,15 +38,13 @@ public class DriveOffLine extends CommandBase {
     timer.start();
     while(timer.get() < 3){
       // swerveSub.driveOffLine();
-      swerveMod.driveOffLine1();
+      swerveSub.driveOffLine();
 
     }
-    swerveMod.stop();
-
-   
-
-    finish = true; 
+    swerveSub.stopModules();
     
+    finish = true; 
+
   }
 
   // Called once the command ends or is interrupted.
