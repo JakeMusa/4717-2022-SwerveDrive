@@ -12,7 +12,7 @@ import frc.robot.subsystems.SwerveSubSystem;
 
 public class DriveOffLine extends CommandBase {
   private SwerveSubSystem swerveSub; 
- 
+  
   private boolean finish = false; 
   Timer timer; 
 
@@ -28,7 +28,9 @@ public class DriveOffLine extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer = new Timer();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,7 +38,7 @@ public class DriveOffLine extends CommandBase {
 
     timer.reset(); 
     timer.start();
-    while(timer.get() < 3){
+    while(timer.get() < 1.5){
       // swerveSub.driveOffLine();
       swerveSub.driveOffLine();
 

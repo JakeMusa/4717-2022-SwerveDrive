@@ -30,16 +30,17 @@ public class Shooter extends SubsystemBase {
     rightShoot.configClosedloopRamp(Constants.shootRamp);
     rightShoot.configOpenloopRamp(Constants.shootRamp);
     rightShoot.setInverted(true);
+    rightShoot.follow(leftShoot);
   }
 
   public void shootBall(double speed){
     leftShoot.set(ControlMode.PercentOutput, speed);
-    rightShoot.set(ControlMode.PercentOutput, speed);
+    // rightShoot.set(ControlMode.PercentOutput, speed);
   }
   
   public void stopShoot(){
     leftShoot.set(ControlMode.PercentOutput, 0);
-    rightShoot.set(ControlMode.PercentOutput, 0);
+    // rightShoot.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

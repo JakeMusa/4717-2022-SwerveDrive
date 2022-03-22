@@ -5,12 +5,15 @@
 package frc.robot;
 
 
+import org.ejml.equation.ParseError;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.DriveOffLine;
 import frc.robot.autos.FireAfter3Sec;
@@ -88,6 +91,7 @@ public class RobotContainer {
     autonTaskChooser = new SendableChooser<>();
     autonTaskChooser.addOption("poop ass", new ParallelDeadlineGroup(new FireAfter3Sec(index), new RevShooter(shooter)));
     autonTaskChooser.addOption("drive off line", new DriveOffLine(swerveSubSystem));
+    autonTaskChooser.addOption("power of friendship", new SequentialCommandGroup(new ParallelDeadlineGroup(new FireAfter3Sec(index), new RevShooter(shooter)),new DriveOffLine(swerveSubSystem)));
     SmartDashboard.putData("auton", autonTaskChooser);
 }
 
