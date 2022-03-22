@@ -4,8 +4,11 @@
 
 package frc.robot.autos;
 
+import java.lang.invoke.ConstantBootstraps;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Index;
 
 public class FireAfter3Sec extends CommandBase {

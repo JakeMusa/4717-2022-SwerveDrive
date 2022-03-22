@@ -5,6 +5,8 @@
 package frc.robot;
 
 
+import org.ejml.equation.ParseError;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -89,9 +91,7 @@ public class RobotContainer {
     autonTaskChooser = new SendableChooser<>();
     autonTaskChooser.addOption("poop ass", new ParallelDeadlineGroup(new FireAfter3Sec(index), new RevShooter(shooter)));
     autonTaskChooser.addOption("drive off line", new DriveOffLine(swerveSubSystem));
-    autonTaskChooser.addOption("please work ", new SequentialCommandGroup(new ParallelDeadlineGroup(new FireAfter3Sec(index), 
-    new RevShooter(shooter)), new DriveOffLine(swerveSubSystem)));
-
+    autonTaskChooser.addOption("power of friendship", new SequentialCommandGroup(new ParallelDeadlineGroup(new FireAfter3Sec(index), new RevShooter(shooter)),new DriveOffLine(swerveSubSystem)));
     SmartDashboard.putData("auton", autonTaskChooser);
 }
 

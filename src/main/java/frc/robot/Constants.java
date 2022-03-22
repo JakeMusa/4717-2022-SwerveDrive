@@ -24,6 +24,7 @@ public final class Constants {
     public static final double angleMotorGearRatio = 1 / (133.25 * 1.094116); 
     public static final double driveRot2Meter = driveMotorGearRatio * Math.PI * wheelDiameterMeters; 
     public static final double angleRot2Rad =   Math.PI * 2 * angleMotorGearRatio; 
+
     public static final double driveRPM2MPS = driveRot2Meter / 60.0; 
     public static final double angleRPM2RPS = angleRot2Rad / 60.0; 
     public static final double kPangle = 0.5; 
@@ -52,15 +53,15 @@ public final class Constants {
         new Translation2d(-wheelBase /2, trackWidth /2)); 
 
     //module constants 
-    public static final int frontRight = 1;
-    public static final int frontLeft = 4;
-    public static final int backRight = 2;
-    public static final int backLeft = 0;
+    public static final int frontRight = 0;
+    public static final int frontLeft = 2;
+    public static final int backRight = 4;
+    public static final int backLeft = 1;
 
-    public static final int a_frontRight = 5;
-    public static final int a_frontLeft = 6;
-    public static final int a_backRight = 1;
-    public static final int a_backLeft = 2;
+    public static final int a_frontRight = 2;
+    public static final int a_frontLeft = 1;
+    public static final int a_backRight = 6;
+    public static final int a_backLeft = 5;
 
     public static final boolean driveMotorReverse = true; 
     public static final boolean driveMotorForward = false;
@@ -74,7 +75,7 @@ public final class Constants {
     public static final int LEFT_SHOOT = 3;     
     public static final int RIGHT_SHOOT = 5; 
     public static final double shootRamp = 0.2;
-    public static final double shootSpeed = 0.65; 
+    public static final double shootSpeed = 0.77; 
     public static final double pootSpeed = 0.4;
 
     //index
