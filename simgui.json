@@ -1,17 +1,28 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "AnalogGyro[0]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Index": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/SwerveSubSystem": "Subsystem",
+      "/LiveWindow/Ungrouped/AnalogGyro[0]": "Gyro",
       "/LiveWindow/Ungrouped/DigitalInput[2]": "Digital Input",
       "/LiveWindow/Ungrouped/PIDController[1]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[2]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[3]": "PIDController",
       "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
-      "/LiveWindow/Ungrouped/VictorSP[0]": "Motor Controller"
+      "/LiveWindow/Ungrouped/VictorSP[0]": "Motor Controller",
+      "/SmartDashboard/auton": "String Chooser"
     }
   },
   "NetworkTables": {
@@ -23,6 +34,9 @@
         "open": true
       },
       "Shooter": {
+        "open": true
+      },
+      "SwerveSubSystem": {
         "open": true
       },
       "Ungrouped": {
@@ -50,6 +64,11 @@
     },
     "SmartDashboard": {
       "open": true
+    },
+    "photonvision": {
+      "deez": {
+        "open": true
+      }
     }
   }
 }

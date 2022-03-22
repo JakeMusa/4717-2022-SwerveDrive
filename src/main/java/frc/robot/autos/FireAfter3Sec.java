@@ -33,10 +33,10 @@ public class FireAfter3Sec extends CommandBase {
   @Override
   public void execute() {
     shottimer.start();
-    if(shottimer.get() > 4.2){
+    if(shottimer.get() > 3){
       shot = true;
     }
-    else if(shottimer.get()>3){
+    else if(shottimer.get()> 2){
       index.fire(0.6);
       index.indexBall(0.3);
     }

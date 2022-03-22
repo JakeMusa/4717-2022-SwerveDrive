@@ -28,7 +28,9 @@ public class DriveOffLine extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    timer = new Timer(); 
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -36,8 +38,7 @@ public class DriveOffLine extends CommandBase {
 
     timer.reset(); 
     timer.start();
-    while(timer.get() < 3){
-      // swerveSub.driveOffLine();
+    while(timer.get() < 1.5){
       swerveSub.driveOffLine();
 
     }
