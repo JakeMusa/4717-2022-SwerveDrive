@@ -41,32 +41,42 @@ public class SwerveSubSystem extends SubsystemBase {
         Constants.driveMotorForward, 
         Constants.angleMotorFoward); 
 
-        //private final Gyro gyro = new AnalogGyro(0); 
+        private final Gyro gyro = new AnalogGyro(0); 
 
-     //   private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(Constants.kDriveKinematics, new Rotation2d(0)); 
+     private final SwerveDriveOdometry odometer = new SwerveDriveOdometry(Constants.kDriveKinematics, new Rotation2d(0)); 
 
-    // public void zeroHeading(){
-    //     gyro.reset();
-    // }
-    // public double getHeading(){
-    //     return Math.IEEEremainder(gyro.getAngle(), 360); 
-    // }
-    // public Rotation2d getRotation2d() {
-    //     return Rotation2d.fromDegrees(getHeading());
-    // }
-    // public Pose2d getPose() {
-    //     return odometer.getPoseMeters();
-    // }
-    // public void resetOdometry(Pose2d pose) {
-    //     odometer.resetPosition(pose, getRotation2d());
-    // }
+    public SwerveSubSystem(){
+        new Thread(() -> {
+            try{
+                Thread.sleep(1000);
+                zeroHeading();
+            }catch(Exception e) {
+            }
+        }).start();
+    }
+
+    public void zeroHeading(){
+        gyro.reset();
+    }
+    public double getHeading(){
+        return Math.IEEEremainder(gyro.getAngle(), 360); 
+    }
+    public Rotation2d getRotation2d() {
+        return Rotation2d.fromDegrees(getHeading());
+    }
+    public Pose2d getPose() {
+        return odometer.getPoseMeters();
+    }
+    public void resetOdometry(Pose2d pose) {
+        odometer.resetPosition(pose, getRotation2d());
+    }
     
     @Override
     public void periodic() {
-        // odometer.update(getRotation2d(), frontLeft.getState(), frontRight.getState(), backLeft.getState(),
-        //         backRight.getState());
-        // SmartDashboard.putNumber("Robot Heading", getHeading());
-        // SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
+        odometer.update(getRotation2d(), frontLeft.getState(), frontRight.getState(), backLeft.getState(),
+                backRight.getState());
+        SmartDashboard.putNumber("Robot Heading", getHeading());
+        SmartDashboard.putString("Robot Location", getPose().getTranslation().toString());
     }
     
     public void driveOffLine(){

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.autos.DriveOffLine;
@@ -24,7 +23,6 @@ import frc.robot.commands.ShootBall;
 import frc.robot.commands.SwerveJoystickCMD;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveModule;
 import frc.robot.subsystems.SwerveSubSystem;
 
 /**
@@ -57,9 +55,8 @@ public class RobotContainer {
     swerveSubSystem.setDefaultCommand(new SwerveJoystickCMD(swerveSubSystem, 
     () -> -driver.getRawAxis(1), 
     () -> driver.getRawAxis(0),
-    () -> driver.getRawAxis(4))); 
-
-    
+    () -> driver.getRawAxis(4),
+    () -> !driver.getRightBumper())); 
 
     shooter = new Shooter(); 
     shootBall = new ShootBall(shooter);
@@ -103,7 +100,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    //new JoystickButton(driver, XboxController.Button.kRightBumper.value).whenPressed(() -> swerveSubSystem.zeroHeading()); 
+    new JoystickButton(driver, XboxController.Button.kStart.value).whenPressed(() -> swerveSubSystem.zeroHeading()); 
 
     JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kA.value);  
     shootButton.toggleWhenPressed(new ShootBall(shooter));  

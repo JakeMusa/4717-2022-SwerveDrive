@@ -6,9 +6,9 @@ package frc.robot.subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -18,11 +18,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.Trajectory.State;
-import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalSource;
-import edu.wpi.first.wpilibj.DutyCycle;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 
@@ -60,9 +55,10 @@ public class SwerveModule {
         // magEncoder = new DigitalInput(encoderport);
         // encoder = new DutyCycle(magEncoder); 
         
-        driveMotor.configOpenloopRamp(0.6);
-        driveMotor.configClosedloopRamp(0.6); 
+        driveMotor.configOpenloopRamp(0);
+        driveMotor.configClosedloopRamp(0); 
         driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 40, 40 ,0));
+        driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor); 
         driveMotor.setNeutralMode(NeutralMode.Brake);
         angleMotor.setIdleMode(IdleMode.kBrake); 
         angleMotor.setClosedLoopRampRate(0);
@@ -80,7 +76,7 @@ public class SwerveModule {
     }
 
     public double getDriveVel(){
-        return Units.inchesToMeters((((driveMotor.getSelectedSensorVelocity()  * 10 )/ 2048 )/5.25)* 3.15*Math.PI);
+        return (driveMotor.getSelectedSensorVelocity() * 600.0/2048.0)  * Constants.driveRPM2MPS; 
     }
     
     public double getAngleVel(){
@@ -114,28 +110,23 @@ public class SwerveModule {
             return;
         }
 
-        state = SwerveModuleState.optimize(state, getState().angle); 
 
         if(Math.round(desiredAngle*10)/10 == 0){
             angleMotor.set(turningPidController.calculate(getAnglePos(), desiredAngle));
+            driveMotor.set(ControlMode.PercentOutput, state.speedMetersPerSecond/Constants.MAXDriveSpeed);
+        }
+        else{
+            state = SwerveModuleState.optimize(state, getState().angle); 
+            driveMotor.set(ControlMode.PercentOutput, state.speedMetersPerSecond/Constants.MAXDriveSpeed);
+            angleMotor.set(turningPidController.calculate(getAnglePos(), state.angle.getRadians()));
+            SmartDashboard.putNumber("actual angle", getAnglePos() * 180 / Math.PI); 
+            SmartDashboard.putNumber("desired angle", Math.round(state.angle.getDegrees()*100)/100);
+            SmartDashboard.putNumber("drive speed", getDriveVel());  
+            SmartDashboard.putNumber("state speed", state.speedMetersPerSecond); 
         }
         
         
-        /* attempted drive set */
-        // driveMotor.set(ControlMode.Velocity, state.speedMetersPerSecond * Constants.MAXDriveSpeed100msTicks);  
         
-        /* normal drive set */
-        driveMotor.set(ControlMode.PercentOutput, state.speedMetersPerSecond/Constants.MAXDriveSpeed);
-
-
-        angleMotor.set(turningPidController.calculate(getAnglePos(), state.angle.getRadians()));
-        SmartDashboard.putNumber("actual angle", getAnglePos() * 180 / Math.PI); 
-        SmartDashboard.putNumber("desired angle", Math.round(state.angle.getDegrees()*100)/100);
-        SmartDashboard.putNumber("drive speed", getDriveVel());  
-        SmartDashboard.putNumber("state speed", state.speedMetersPerSecond); 
-        SmartDashboard.putNumber("i dont know ", Constants.MAXDriveSpeed100msTicks); 
-        //SmartDashboard.putNumber("magencoder", getMagEncoder());
-        //.putString("Swerve["+ getMagEncoder() + "] State", state.toString()); 
 
     }
 

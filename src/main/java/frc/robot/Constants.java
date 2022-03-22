@@ -24,13 +24,15 @@ public final class Constants {
     public static final double angleMotorGearRatio = 1 / (133.25 * 1.094116); 
     public static final double driveRot2Meter = driveMotorGearRatio * Math.PI * wheelDiameterMeters; 
     public static final double angleRot2Rad =   Math.PI * 2 * angleMotorGearRatio; 
-    public static final double driveRPM2MPS = driveRot2Meter * 60; 
-    public static final double angleRPM2RPS = angleRot2Rad / 60; 
-    public static final double kPangle = 0.9; 
+    public static final double driveRPM2MPS = driveRot2Meter / 60.0; 
+    public static final double angleRPM2RPS = angleRot2Rad / 60.0; 
+    public static final double kPangle = 0.5; 
     public static final double kIangle = 0; 
     public static final double kDangle = 0; 
     //the max drive speed is small just for testing purposes. 
-    public static final double MAXDriveSpeed = 2.0; 
+    public static final double MAXDriveSpeed = 4.0;
+    public static final double TeleMaxSpeedMPS = 4.0; 
+    public static final double TeleMaxAngleSpeedRadPS = Math.PI;  
 
     //piece of shit constant? mmaye works idk lol
     public static final double MAXDriveSpeed100msTicks = (MAXDriveSpeed/(wheelDiameterMeters*Math.PI) / 10 * 2048)*5.25; 
