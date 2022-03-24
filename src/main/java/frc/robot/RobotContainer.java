@@ -5,7 +5,6 @@
 package frc.robot;
 
 
-import org.ejml.equation.ParseError;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -21,10 +20,12 @@ import frc.robot.autos.RevShooter;
 import frc.robot.commands.FastIndex;
 import frc.robot.commands.Fire;
 import frc.robot.commands.IndexBall;
+import frc.robot.commands.LiftUp;
 import frc.robot.commands.ReverseIndex;
 import frc.robot.commands.ShootBall;
 import frc.robot.commands.SwerveJoystickCMD;
 import frc.robot.subsystems.Index;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubSystem;
 
@@ -45,6 +46,8 @@ public class RobotContainer {
   private final FastIndex fastIndex; 
   private final ReverseIndex reverseIndex; 
   private final DriveOffLine driveOffLine; 
+  private final Lift lift; 
+  private final LiftUp liftUp; 
  
   private SendableChooser<Command> autonTaskChooser;
 
@@ -58,8 +61,7 @@ public class RobotContainer {
     swerveSubSystem.setDefaultCommand(new SwerveJoystickCMD(swerveSubSystem, 
     () -> -driver.getRawAxis(1), 
     () -> driver.getRawAxis(0),
-    () -> driver.getRawAxis(4),
-    () -> !driver.getRightBumper())); 
+    () -> driver.getRawAxis(4))); 
 
     shooter = new Shooter(); 
     shootBall = new ShootBall(shooter);
@@ -78,6 +80,10 @@ public class RobotContainer {
     //uwu i like making things that are unnecessary just for derek 
     driveOffLine = new DriveOffLine(swerveSubSystem);
     driveOffLine.addRequirements(swerveSubSystem);
+
+    lift = new Lift(); 
+    liftUp = new LiftUp(lift);
+    liftUp.addRequirements(lift);
 
    
     
@@ -104,7 +110,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     
-    new JoystickButton(driver, XboxController.Button.kStart.value).whenPressed(() -> swerveSubSystem.zeroHeading()); 
+    //new JoystickButton(driver, XboxController.Button.kStart.value).whenPressed(() -> swerveSubSystem.zeroHeading()); 
 
     JoystickButton shootButton = new JoystickButton(driver, XboxController.Button.kA.value);  
     shootButton.toggleWhenPressed(new ShootBall(shooter));  
@@ -120,6 +126,9 @@ public class RobotContainer {
 
     JoystickButton reverseIndexButton = new JoystickButton(driver, XboxController.Button.kLeftBumper.value); 
     reverseIndexButton.whileHeld(new ReverseIndex(index)); 
+
+    JoystickButton liftButton = new JoystickButton(driver, XboxController.Button.kRightBumper.value); 
+    liftButton.whileHeld(new LiftUp(lift)); 
 
   }
   

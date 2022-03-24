@@ -33,8 +33,8 @@ public class ShootBall extends CommandBase {
   @Override
   public void execute() {
     
-    shooter.shootBall(!Shooter.pootornoot ? Constants.shootSpeed : Constants.pootSpeed);
-    shooter.shootBall(Constants.shootSpeed);
+    shooter.shootBall(!shooter.pootChooser.getSelected() ? Constants.shootSpeed : Constants.pootSpeed);
+    // shooter.shootBall(Constants.shootSpeed);
 
   }
 

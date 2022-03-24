@@ -29,7 +29,7 @@ public class RevShooter extends CommandBase {
   @Override
   public void execute() {
 
-    shoot.shootBall(0.3);
+    shoot.shootBall(0.7);
 
   }
 

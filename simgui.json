@@ -12,6 +12,7 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/LiveWindow/Index": "Subsystem",
+      "/LiveWindow/Lift": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
       "/LiveWindow/SwerveSubSystem": "Subsystem",
       "/LiveWindow/Ungrouped/AnalogGyro[0]": "Gyro",
@@ -22,7 +23,9 @@
       "/LiveWindow/Ungrouped/PIDController[4]": "PIDController",
       "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
       "/LiveWindow/Ungrouped/VictorSP[0]": "Motor Controller",
-      "/SmartDashboard/auton": "String Chooser"
+      "/LiveWindow/Ungrouped/VictorSP[3]": "Motor Controller",
+      "/SmartDashboard/auton": "String Chooser",
+      "/SmartDashboard/shooterpower": "String Chooser"
     }
   },
   "NetworkTables": {
@@ -31,6 +34,9 @@
         "open": true
       },
       "Index": {
+        "open": true
+      },
+      "Lift": {
         "open": true
       },
       "Shooter": {
@@ -56,6 +62,9 @@
           "open": true
         },
         "VictorSP[0]": {
+          "open": true
+        },
+        "VictorSP[3]": {
           "open": true
         },
         "open": true

@@ -39,7 +39,7 @@ public final class Constants {
     public static final double MAXDriveSpeed100msTicks = (MAXDriveSpeed/(wheelDiameterMeters*Math.PI) / 10 * 2048)*5.25; 
 
     public static final double autoDriveSpeed = -0.2; 
-    public static final double Deadband = 0.2; 
+    public static final double Deadband = 0.1; 
     
     //left and right distance  
     public static final double trackWidth = Units.inchesToMeters(26); 
@@ -75,12 +75,15 @@ public final class Constants {
     public static final int LEFT_SHOOT = 3;     
     public static final int RIGHT_SHOOT = 5; 
     public static final double shootRamp = 0.2;
-    public static final double shootSpeed = 0.77; 
+    public static final double shootSpeed = 0.7; 
     public static final double pootSpeed = 0.4;
 
     //index
     public static final int leftIndex = 4; 
     public static final int rightIndex = 3; 
-    public static final double indexSpeed = -0.25; 
+    public static final double indexSpeed = 0.3; 
+
+    //lift
+    public static final double liftSpeed = 0.6; 
 
 }

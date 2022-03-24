@@ -24,7 +24,7 @@ public class Index extends SubsystemBase {
     index1.setClosedLoopRampRate(0);
     index1.setOpenLoopRampRate(0); 
     index1.setIdleMode(IdleMode.kBrake); 
-    index1.setInverted(true);
+    index1.setInverted(false);
     index1.setSmartCurrentLimit(20);
 
     index2 = new CANSparkMax(Constants.rightIndex, MotorType.kBrushless); 
@@ -46,7 +46,7 @@ public class Index extends SubsystemBase {
       
   
     if(limitSwitch.get()){
-        fireMotor.set(0.8);
+        fireMotor.set(0.5);
     }
      else{
       fireMotor.set(0);
@@ -62,12 +62,12 @@ public class Index extends SubsystemBase {
   
   public void fire(double speed){
       fireMotor.set(0.3);
-     // indexBall(speed);
+     pureIndex(Constants.indexSpeed);
   }
 
   public void fastIndex(){
-    index1.set(-0.5);
-    index2.set(-0.5);
+    index1.set(0.5);
+    index2.set(0.5);
   
     // if(limitSwitch.get()){
     //     fireMotor.set(0.3);
@@ -77,8 +77,8 @@ public class Index extends SubsystemBase {
   
   public void reverseIndex(){
     fireMotor.set(-0.3);
-    index1.set(0.5);
-    index2.set(0.5);
+    index1.set(-0.5);
+    index2.set(-0.5);
   }
 
   public void stopIndex(){
@@ -89,7 +89,7 @@ public class Index extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("limitSwitch", limitSwitch.get()); 
+    SmartDashboard.putBoolean("limitSwitch", !limitSwitch.get()); 
     // This method will be called once per scheduler run
   }
 }

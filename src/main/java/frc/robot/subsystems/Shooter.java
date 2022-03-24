@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -15,9 +16,15 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
   private TalonFX leftShoot, rightShoot; 
   public static boolean pootornoot = false;
+  public SendableChooser<Boolean> pootChooser = new SendableChooser<>();
   /** Creates a new Shooter. */
   public Shooter() {
     
+    pootChooser.addOption("high", false);
+    pootChooser.addOption("low", true);
+    pootChooser.setDefaultOption("high", false);
+
+
     leftShoot = new TalonFX(Constants.LEFT_SHOOT);
     leftShoot.setNeutralMode(NeutralMode.Coast);
     leftShoot.configClosedloopRamp(Constants.shootRamp);
@@ -47,7 +54,8 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("left shooter speed", leftShoot.getSelectedSensorVelocity()*600/2048);
     SmartDashboard.putNumber("shooter surface speed", leftShoot.getSelectedSensorVelocity()*60/2048 * Math.PI); 
-    SmartDashboard.putBoolean("pooting?", pootornoot); 
+    SmartDashboard.putData("shooterpower", pootChooser);
+    
     // This method will be called once per scheduler run
   }
 }
