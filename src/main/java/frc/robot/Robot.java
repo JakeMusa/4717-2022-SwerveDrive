@@ -6,7 +6,9 @@ package frc.robot;
 
 import org.photonvision.PhotonCamera;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 //this is a git fetch test btw these are imports they sorta important, uwu derek is stinky, i need help from asian guy at 148 please james 
 //james, please we dont know how to drive with a distance yet its confusing or something
@@ -35,6 +37,9 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    
+
   }
 
   /**
@@ -97,7 +102,25 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    camera.setDriverMode(true);
+    camera.setDriverMode(false);
+
+    var result = camera.getLatestResult();
+    if(result.hasTargets()){
+      double hango = result.getBestTarget().getYaw();
+      double vango = result.getBestTarget().getPitch() + 30;
+      double vrango = Math.toRadians(vango);
+
+      SmartDashboard.putNumber("ango", hango);
+      SmartDashboard.putNumber("vertical ango", vango);
+
+      //distance detection math
+      double distanceto = 1.625599/Math.tan(vrango);
+
+      SmartDashboard.putNumber("distance", distanceto);
+
+      //5ft6 off of goal, currently using 5ft4
+
+    }
   }
 
   @Override

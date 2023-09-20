@@ -5,16 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.Index;
+import frc.robot.subsystems.Lift;
 
-public class Fire extends CommandBase {
-  private final Index index; 
-
-  /** Creates a new Fire. */
-  public Fire(Index i) {
-    index = i;
-    addRequirements(index);
+public class LiftUp extends CommandBase {
+  private Lift lift; 
+  /** Creates a new LiftUp. */
+  public LiftUp(Lift l) {
+    lift = l; 
+    addRequirements(lift);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -25,13 +23,13 @@ public class Fire extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    index.fire(0.3);
+    lift.lift();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    index.stopIndex();
+    lift.stopLift();
   }
 
   // Returns true when the command should end.
